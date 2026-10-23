@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>日期差與年齡計算器 | Date Difference & Age Calculator</title>
+  <meta name="description" content="使用 iOS 3D 滾輪選擇器（ios-picker-wheel）計算兩個日期間的年、月、天差值及真實年齡。">
+  <link rel="stylesheet" href="styles.css">
+  <script defer src="script.js"></script>
+</head>
+<body class="theme-wood">
+  <div class="app-wrapper">
+    <!-- Header -->
+    <header class="app-header">
+      <div class="header-left">
+        <div class="logo-icon">⏳</div>
+        <div>
+          <h1 class="app-title" data-i18n="appTitle">日期差與年齡計算器</h1>
+          <p class="app-subtitle" data-i18n="appSubtitle">基於 iOS 3D 滾輪選擇器 · 精確計算年、月、天之差</p>
+        </div>
+      </div>
+      <div class="header-right">
+        <!-- Theme Selector -->
+        <div class="theme-selector-wrap">
+          <label for="themeSelect" class="sr-only" data-i18n="themeLabel">主題樣式</label>
+          <select id="themeSelect" class="theme-select" aria-label="Select Theme">
+            <option value="theme-wood" selected>🪵 典雅木紋 (Wood Drum)</option>
+            <option value="theme-ios-dark">📱 iOS 暗夜 (iOS Dark)</option>
+            <option value="theme-ios-light">⚪ iOS 純白 (iOS Light)</option>
+            <option value="theme-midnight">🌌 星空深邃 (Midnight)</option>
+          </select>
+        </div>
+        <!-- Sound Toggle -->
+        <button type="button" id="soundToggleBtn" class="sound-btn" title="切換音效與震動 / Toggle Sound & Vibration">
+          <span id="soundIcon">🔊</span>
+          <span id="soundText" data-i18n="soundOn">音效: 開</span>
+        </button>
+        <!-- Language Selector -->
+        <button type="button" id="langToggleBtn" class="lang-btn" title="切換語言 / Switch Language">
+          🌐 <span id="langText">EN</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- Main Pickers Section -->
+    <main class="main-container">
+      <div class="pickers-grid">
+        <!-- Card 1: Start Date (起始日期 / 出生日) -->
+        <section class="picker-card" aria-labelledby="startDateHeading">
+          <div class="card-header">
+            <div class="card-title-group">
+              <span class="card-tag start-tag" data-i18n="startTag">起始</span>
+              <h2 id="startDateHeading" class="card-title" data-i18n="startDateTitle">起始日期 (出生日)</h2>
+            </div>
+            <div class="card-date-badge" id="startDateBadge">2000年 01月 01日</div>
+          </div>
+
+          <div class="card-presets">
+            <button type="button" class="preset-btn" id="startPreset2000" data-i18n="preset2000">2000年元旦</button>
+            <button type="button" class="preset-btn" id="startPreset18Y" data-i18n="preset18Y">18年前</button>
+            <button type="button" class="preset-btn" id="startPreset30Y" data-i18n="preset30Y">30年前</button>
+            <button type="button" class="preset-btn" id="startPresetToday" data-i18n="presetToday">今天</button>
+          </div>
+
+          <!-- iOS 3D Wheel Picker for Start Date -->
+          <div class="ios-wheel-picker" id="startWheelPicker" aria-label="Start Date Wheel Picker">
+            <div class="ios-picker-highlight"></div>
+            
+            <!-- Year Column -->
+            <div class="ios-picker-column" id="startYearColumn" data-type="year" tabindex="0" role="spinbutton" aria-label="Select Start Year">
+              <div class="ios-picker-wheel" id="iosStartYearWheel"></div>
+            </div>
+            
+            <div class="ios-picker-separator"></div>
+            
+            <!-- Month Column -->
+            <div class="ios-picker-column" id="startMonthColumn" data-type="month" tabindex="0" role="spinbutton" aria-label="Select Start Month">
+              <div class="ios-picker-wheel" id="iosStartMonthWheel"></div>
+            </div>
+            
+            <div class="ios-picker-separator"></div>
+            
+            <!-- Day Column -->
+            <div class="ios-picker-column" id="startDayColumn" data-type="day" tabindex="0" role="spinbutton" aria-label="Select Start Day">
+              <div class="ios-picker-wheel" id="iosStartDayWheel"></div>
+            </div>
+          </div>
+
+          <!-- Stepper navigation row -->
+          <div class="picker-steppers">
+            <div class="stepper-group" data-target="startYear">
+              <button type="button" class="step-btn" data-action="prev" title="上一年">◀</button>
+              <span class="stepper-label" data-i18n="unitYear">年</span>
+              <button type="button" class="step-btn" data-action="next" title="下一年">▶</button>
+            </div>
+            <div class="stepper-group" data-target="startMonth">
+              <button type="button" class="step-btn" data-action="prev" title="上一月">◀</button>
+              <span class="stepper-label" data-i18n="unitMonth">月</span>
+              <button type="button" class="step-btn" data-action="next" title="下一月">▶</button>
+            </div>
+            <div class="stepper-group" data-target="startDay">
+              <button type="button" class="step-btn" data-action="prev" title="前一天">◀</button>
+              <span class="stepper-label" data-i18n="unitDay">日</span>
+              <button type="button" class="step-btn" data-action="next" title="後一天">▶</button>
+            </div>
+          </div>
+
+          <!-- Meta badges for Start Date -->
+          <div class="card-meta-row">
+            <span class="meta-pill" id="startWeekdayPill">📅 星期六</span>
+            <span class="meta-pill" id="startZodiacPill">♑ 摩羯座</span>
+            <span class="meta-pill" id="startChineseZodiacPill">🐲 龍年</span>
+            <span class="meta-pill" id="startLeapPill">閏年 (366天)</span>
+          </div>
+        </section>
+
+        <!-- Swap Button in between -->
+        <div class="swap-divider">
+          <button type="button" id="swapDatesBtn" class="swap-btn" title="交換起始與結束日期 / Swap Start and End Dates">
+            <span class="swap-icon">⇅</span>
+            <span class="swap-text" data-i18n="swapDates">對調日期</span>
+          </button>
+        </div>
+
+        <!-- Card 2: End Date (結束日期 / 目標日) -->
+        <section class="picker-card" aria-labelledby="endDateHeading">
+          <div class="card-header">
+            <div class="card-title-group">
+              <span class="card-tag end-tag" data-i18n="endTag">結束</span>
+              <h2 id="endDateHeading" class="card-title" data-i18n="endDateTitle">結束日期 (目標日)</h2>
+            </div>
+            <div class="card-date-badge" id="endDateBadge">2026年 10月 23日</div>
+          </div>
+
+          <div class="card-presets">
+            <button type="button" class="preset-btn active" id="endPresetToday" data-i18n="presetEndToday">設為今天</button>
+            <button type="button" class="preset-btn" id="endPresetPlus1Y" data-i18n="presetPlus1Y">+1 年</button>
+            <button type="button" class="preset-btn" id="endPresetPlus1M" data-i18n="presetPlus1M">+1 月</button>
+            <button type="button" class="preset-btn" id="endPresetPlus100D" data-i18n="presetPlus100D">+100 天</button>
+          </div>
+
+          <!-- iOS 3D Wheel Picker for End Date -->
+          <div class="ios-wheel-picker" id="endWheelPicker" aria-label="End Date Wheel Picker">
+            <div class="ios-picker-highlight"></div>
+            
+            <!-- Year Column -->
+            <div class="ios-picker-column" id="endYearColumn" data-type="year" tabindex="0" role="spinbutton" aria-label="Select End Year">
+              <div class="ios-picker-wheel" id="iosEndYearWheel"></div>
+            </div>
+            
+            <div class="ios-picker-separator"></div>
+            
+            <!-- Month Column -->
+            <div class="ios-picker-column" id="endMonthColumn" data-type="month" tabindex="0" role="spinbutton" aria-label="Select End Month">
+              <div class="ios-picker-wheel" id="iosEndMonthWheel"></div>
+            </div>
+            
+            <div class="ios-picker-separator"></div>
+            
+            <!-- Day Column -->
+            <div class="ios-picker-column" id="endDayColumn" data-type="day" tabindex="0" role="spinbutton" aria-label="Select End Day">
+              <div class="ios-picker-wheel" id="iosEndDayWheel"></div>
+            </div>
+          </div>
+
+          <!-- Stepper navigation row -->
+          <div class="picker-steppers">
+            <div class="stepper-group" data-target="endYear">
+              <button type="button" class="step-btn" data-action="prev" title="上一年">◀</button>
+              <span class="stepper-label" data-i18n="unitYear">年</span>
+              <button type="button" class="step-btn" data-action="next" title="下一年">▶</button>
+            </div>
+            <div class="stepper-group" data-target="endMonth">
+              <button type="button" class="step-btn" data-action="prev" title="上一月">◀</button>
+              <span class="stepper-label" data-i18n="unitMonth">月</span>
+              <button type="button" class="step-btn" data-action="next" title="下一月">▶</button>
+            </div>
+            <div class="stepper-group" data-target="endDay">
+              <button type="button" class="step-btn" data-action="prev" title="前一天">◀</button>
+              <span class="stepper-label" data-i18n="unitDay">日</span>
+              <button type="button" class="step-btn" data-action="next" title="後一天">▶</button>
+            </div>
+          </div>
+
+          <!-- Meta badges for End Date -->
+          <div class="card-meta-row">
+            <span class="meta-pill" id="endWeekdayPill">📅 星期五</span>
+            <span class="meta-pill" id="endRelativePill">📍 今天</span>
+            <span class="meta-pill" id="endLeapPill">平年 (365天)</span>
+          </div>
+        </section>
+      </div>
+
+      <!-- Result Hero Section -->
+      <section class="result-hero" aria-labelledby="resultHeading">
+        <div class="result-hero-inner">
+          <div class="result-top-bar">
+            <div class="result-label-group">
+              <span class="result-icon">🎯</span>
+              <h2 id="resultHeading" class="result-title" data-i18n="resultTitle">日期差與計算結果 (真實年齡)</h2>
+            </div>
+            <button type="button" id="copyResultBtn" class="copy-btn" title="複製計算結果">
+              <span id="copyIcon">📋</span>
+              <span id="copyText" data-i18n="copyText">複製結果</span>
+            </button>
+          </div>
+
+          <!-- Notice banner if End Date is before Start Date -->
+          <div id="negativeNotice" class="negative-notice hidden" role="alert">
+            <span class="notice-icon">⚠️</span>
+            <span class="notice-text" data-i18n="negativeNoticeText">結束日期早於起始日期，結果已按倒計方式顯示。您可以點擊上方「對調日期」按鈕調整次序。</span>
+          </div>
+
+          <!-- Main Difference Counter Blocks -->
+          <div class="diff-counter-display">
+            <div class="diff-block">
+              <span class="diff-number" id="diffYears">26</span>
+              <span class="diff-unit" data-i18n="unitYears">年</span>
+            </div>
+            <span class="diff-plus">+</span>
+            <div class="diff-block">
+              <span class="diff-number" id="diffMonths">9</span>
+              <span class="diff-unit" data-i18n="unitMonths">個月</span>
+            </div>
+            <span class="diff-plus">+</span>
+            <div class="diff-block">
+              <span class="diff-number" id="diffDays">22</span>
+              <span class="diff-unit" data-i18n="unitDays">天</span>
+            </div>
+          </div>
+
+          <!-- Summary Sentence -->
+          <p class="diff-summary-sentence" id="diffSummarySentence">
+            從 <strong>2000年01月01日</strong> 到 <strong>2026年10月23日</strong>，共相差 <strong>26 年 9 個月 22 天</strong>（年齡周歲：<strong>26</strong> 歲）。
+          </p>
+        </div>
+      </section>
+
+      <!-- Multi-Unit Breakdown Grid -->
+      <section class="breakdown-section" aria-labelledby="breakdownHeading">
+        <h3 id="breakdownHeading" class="section-subtitle" data-i18n="breakdownTitle">多維度時間總計換算</h3>
+        <div class="breakdown-grid">
+          <div class="breakdown-card">
+            <div class="breakdown-icon">📆</div>
+            <div class="breakdown-content">
+              <div class="breakdown-value" id="totalDaysVal">9,792</div>
+              <div class="breakdown-label" data-i18n="labelTotalDays">總天數 (Days)</div>
+            </div>
+          </div>
+
+          <div class="breakdown-card">
+            <div class="breakdown-icon">🗓️</div>
+            <div class="breakdown-content">
+              <div class="breakdown-value" id="totalWeeksVal">1,398 週 6 天</div>
+              <div class="breakdown-label" data-i18n="labelTotalWeeks">週與天數 (Weeks & Days)</div>
+            </div>
+          </div>
+
+          <div class="breakdown-card">
+            <div class="breakdown-icon">🌙</div>
+            <div class="breakdown-content">
+              <div class="breakdown-value" id="totalMonthsVal">321 個月 22 天</div>
+              <div class="breakdown-label" data-i18n="labelTotalMonths">累計月數 (Months & Days)</div>
+            </div>
+          </div>
+
+          <div class="breakdown-card">
+            <div class="breakdown-icon">⏰</div>
+            <div class="breakdown-content">
+              <div class="breakdown-value" id="totalHoursVal">235,008</div>
+              <div class="breakdown-label" data-i18n="labelTotalHours">總小時數 (Hours)</div>
+            </div>
+          </div>
+
+          <div class="breakdown-card">
+            <div class="breakdown-icon">⏱️</div>
+            <div class="breakdown-content">
+              <div class="breakdown-value" id="totalMinutesVal">14,100,480</div>
+              <div class="breakdown-label" data-i18n="labelTotalMinutes">總分鐘數 (Minutes)</div>
+            </div>
+          </div>
+
+          <div class="breakdown-card">
+            <div class="breakdown-icon">💼</div>
+            <div class="breakdown-content">
+              <div class="breakdown-value" id="totalWorkdaysVal">6,994</div>
+              <div class="breakdown-label" data-i18n="labelTotalWorkdays">工作日約計 (5天制)</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Age Milestones & Birthday Countdown -->
+      <section class="milestone-section" aria-labelledby="milestoneHeading">
+        <h3 id="milestoneHeading" class="section-subtitle" data-i18n="milestoneTitle">年齡與生活里程碑</h3>
+        <div class="milestones-grid">
+          <!-- Next Birthday Card -->
+          <div class="milestone-card highlight-card">
+            <div class="milestone-badge">🎂 <span data-i18n="nextBdayTitle">下一個生日</span></div>
+            <div class="milestone-headline" id="nextBdayCountdown">還有 69 天</div>
+            <div class="milestone-sub" id="nextBdayDate">日期：2027年01月01日 (27歲生日)</div>
+            <div class="progress-bar-bg">
+              <div class="progress-bar-fill" id="bdayProgressFill" style="width: 81%;"></div>
+            </div>
+            <div class="progress-note" id="bdayProgressNote">當前歲數進度：已過 81%</div>
+          </div>
+
+          <!-- 10,000 Days Milestone Card -->
+          <div class="milestone-card">
+            <div class="milestone-badge">✨ <span data-i18n="tenThousandDayTitle">人生的第一萬天</span></div>
+            <div class="milestone-headline" id="tenThousandDate">2027年05月19日</div>
+            <div class="milestone-sub" id="tenThousandStatus">還有 208 天到達此里程碑</div>
+          </div>
+
+          <!-- Adult Milestone Card -->
+          <div class="milestone-card">
+            <div class="milestone-badge">🌱 <span data-i18n="legalAdultTitle">18 歲成人禮</span></div>
+            <div class="milestone-headline" id="adultDate">2018年01月01日</div>
+            <div class="milestone-sub" id="adultStatus">已於 8 年前成年</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Usage Tips Guide -->
+      <footer class="app-footer">
+        <div class="tips-box">
+          <div class="tips-title">💡 <span data-i18n="tipsTitle">操作提示與互動指南</span></div>
+          <ul class="tips-list">
+            <li data-i18n="tip1"><strong>3D 滾輪操作：</strong>支援滑鼠滾輪滾動、滑鼠拖曳甩動、觸控手勢上下滑動、以及點擊任意可見項目直接對齊。</li>
+            <li data-i18n="tip2"><strong>鍵盤無障礙：</strong>選中滾輪列後，可按上下方向鍵（↑ / ↓）或翻頁鍵（PageUp / PageDown）微調。</li>
+            <li data-i18n="tip3"><strong>動態天數自適應：</strong>選擇不同年份與月份時，日數滾輪將自動在 28 / 29 / 30 / 31 天間平滑約束與切換。</li>
+            <li data-i18n="tip4"><strong>純靜態架構：</strong>本工具為純靜態頁面，無需任何後端伺服器或連網請求，隨時隨地雙擊開啟即用。</li>
+          </ul>
+        </div>
+      </footer>
+    </main>
+
+    <!-- Toast Notification Container -->
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  </div>
+</body>
+</html>
