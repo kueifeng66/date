@@ -1,0 +1,1056 @@
+/* ==========================================================================
+   Root Variables & Typography
+   Base font size: 62.5% -> 1rem = 10px for precise iOS drum mathematics
+   ========================================================================== */
+
+:root {
+  --font-sans: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
+  --font-serif: Georgia, "Songti SC", "SimSun", serif;
+
+  /* Geometry matches ref/script.js and ref/styles.css exactly */
+  --wheel-height: 7.8rem;
+  --item-height: 2.6rem;
+  --item-half-height: 1.3rem;
+
+  /* Transitions */
+  --transition-fast: 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-normal: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  --radius-sm: 0.6rem;
+  --radius-md: 1.2rem;
+  --radius-lg: 1.6rem;
+}
+
+/* ==========================================================================
+   Theme 1: Wood Crafted Drum (Directly aligned with ref reference)
+   ========================================================================== */
+body.theme-wood {
+  --bg-app: #120904;
+  --bg-gradient: radial-gradient(circle at 50% 15%, #2a150a 0%, #170c06 50%, #0d0603 100%);
+  --card-bg: rgba(35, 18, 10, 0.88);
+  --card-border: #5a341e;
+  --card-shadow: 0 0.8rem 2.4rem rgba(0, 0, 0, 0.55), inset 0 0.1rem 0 rgba(235, 195, 125, 0.15);
+
+  --text-main: #fbf5ea;
+  --text-muted: #c8ab8f;
+  --text-subtle: #8e7259;
+
+  --accent-gold: #f0cd8c;
+  --accent-gold-dark: #b6873e;
+  --accent-glow: rgba(240, 205, 140, 0.35);
+
+  /* Drum Wheel specific colors from ref */
+  --drum-bg: linear-gradient(180deg, #1b0e07 0%, #331a0e 25%, #4d2a17 50%, #331a0e 75%, #1b0e07 100%);
+  --drum-border: #6e4327;
+  --drum-shadow: inset 0 0.3rem 0.8rem rgba(0, 0, 0, 0.65), 0 0.2rem 0.5rem rgba(0, 0, 0, 0.35);
+  --drum-vignette-start: rgba(20, 10, 5, 0.96);
+  --drum-vignette-mid: rgba(20, 10, 5, 0);
+
+  --highlight-bg: rgba(240, 205, 140, 0.22);
+  --highlight-border: rgba(235, 195, 125, 0.7);
+  --highlight-glow: 0 0 0.8rem rgba(230, 175, 75, 0.25);
+
+  --item-text: rgba(225, 205, 180, 0.65);
+  --item-active-text: #fff9ea;
+  --item-active-shadow: 0 0 0.6rem rgba(240, 195, 110, 0.6), 0 0.1rem 0.2rem rgba(0, 0, 0, 0.8);
+  --separator-bg: rgba(210, 165, 105, 0.3);
+
+  --hero-bg: linear-gradient(135deg, rgba(58, 29, 14, 0.95) 0%, rgba(36, 17, 8, 0.95) 100%);
+  --hero-border: #7e4b2a;
+  --hero-num-color: #ffd688;
+}
+
+/* ==========================================================================
+   Theme 2: iOS Modern Dark (Sleek Apple Dark Mode)
+   ========================================================================== */
+body.theme-ios-dark {
+  --bg-app: #000000;
+  --bg-gradient: radial-gradient(circle at 50% 20%, #1c1c1e 0%, #0d0d0f 60%, #000000 100%);
+  --card-bg: rgba(28, 28, 30, 0.85);
+  --card-border: #38383a;
+  --card-shadow: 0 0.8rem 2.4rem rgba(0, 0, 0, 0.6), inset 0 0.1rem 0 rgba(255, 255, 255, 0.1);
+
+  --text-main: #ffffff;
+  --text-muted: #aeaeb2;
+  --text-subtle: #636366;
+
+  --accent-gold: #0a84ff;
+  --accent-gold-dark: #0060df;
+  --accent-glow: rgba(10, 132, 255, 0.35);
+
+  --drum-bg: linear-gradient(180deg, #121214 0%, #202024 25%, #2c2c32 50%, #202024 75%, #121214 100%);
+  --drum-border: #3a3a40;
+  --drum-shadow: inset 0 0.3rem 0.8rem rgba(0, 0, 0, 0.8), 0 0.2rem 0.5rem rgba(0, 0, 0, 0.4);
+  --drum-vignette-start: rgba(14, 14, 16, 0.96);
+  --drum-vignette-mid: rgba(14, 14, 16, 0);
+
+  --highlight-bg: rgba(10, 132, 255, 0.22);
+  --highlight-border: rgba(10, 132, 255, 0.7);
+  --highlight-glow: 0 0 0.8rem rgba(10, 132, 255, 0.3);
+
+  --item-text: rgba(220, 220, 230, 0.55);
+  --item-active-text: #ffffff;
+  --item-active-shadow: 0 0 0.8rem rgba(10, 132, 255, 0.6);
+  --separator-bg: rgba(255, 255, 255, 0.18);
+
+  --hero-bg: linear-gradient(135deg, rgba(28, 38, 54, 0.95) 0%, rgba(18, 22, 32, 0.95) 100%);
+  --hero-border: #29466e;
+  --hero-num-color: #64d2ff;
+}
+
+/* ==========================================================================
+   Theme 3: iOS Classic Light (Crisp Apple Silver / Light)
+   ========================================================================== */
+body.theme-ios-light {
+  --bg-app: #f2f2f7;
+  --bg-gradient: radial-gradient(circle at 50% 15%, #ffffff 0%, #f2f2f7 60%, #e5e5ea 100%);
+  --card-bg: rgba(255, 255, 255, 0.92);
+  --card-border: #d1d1d6;
+  --card-shadow: 0 0.8rem 2.4rem rgba(0, 0, 0, 0.08), inset 0 0.1rem 0 rgba(255, 255, 255, 0.8);
+
+  --text-main: #1c1c1e;
+  --text-muted: #636366;
+  --text-subtle: #8e8e93;
+
+  --accent-gold: #007aff;
+  --accent-gold-dark: #0056b3;
+  --accent-glow: rgba(0, 122, 255, 0.25);
+
+  --drum-bg: linear-gradient(180deg, #d8d8de 0%, #ebebef 25%, #ffffff 50%, #ebebef 75%, #d8d8de 100%);
+  --drum-border: #c7c7cc;
+  --drum-shadow: inset 0 0.3rem 0.8rem rgba(0, 0, 0, 0.12), 0 0.2rem 0.5rem rgba(0, 0, 0, 0.06);
+  --drum-vignette-start: rgba(220, 220, 226, 0.94);
+  --drum-vignette-mid: rgba(255, 255, 255, 0);
+
+  --highlight-bg: rgba(0, 122, 255, 0.14);
+  --highlight-border: rgba(0, 122, 255, 0.5);
+  --highlight-glow: 0 0 0.8rem rgba(0, 122, 255, 0.2);
+
+  --item-text: rgba(80, 80, 88, 0.65);
+  --item-active-text: #007aff;
+  --item-active-shadow: 0 0.1rem 0.2rem rgba(0, 0, 0, 0.15);
+  --separator-bg: rgba(60, 60, 67, 0.2);
+
+  --hero-bg: linear-gradient(135deg, #ffffff 0%, #edf4fc 100%);
+  --hero-border: #bcd5f5;
+  --hero-num-color: #007aff;
+}
+
+/* ==========================================================================
+   Theme 4: Midnight Galaxy (Deep Indigo & Violet)
+   ========================================================================== */
+body.theme-midnight {
+  --bg-app: #080816;
+  --bg-gradient: radial-gradient(circle at 50% 15%, #181236 0%, #0d0a1f 50%, #05040a 100%);
+  --card-bg: rgba(22, 17, 44, 0.88);
+  --card-border: #42356c;
+  --card-shadow: 0 0.8rem 2.4rem rgba(0, 0, 0, 0.65), inset 0 0.1rem 0 rgba(200, 180, 255, 0.15);
+
+  --text-main: #f5f2ff;
+  --text-muted: #b9b0d6;
+  --text-subtle: #796e9c;
+
+  --accent-gold: #bf5af2;
+  --accent-gold-dark: #9333ea;
+  --accent-glow: rgba(191, 90, 242, 0.35);
+
+  --drum-bg: linear-gradient(180deg, #0e0921 0%, #1e153f 25%, #2d2159 50%, #1e153f 75%, #0e0921 100%);
+  --drum-border: #4d3878;
+  --drum-shadow: inset 0 0.3rem 0.8rem rgba(0, 0, 0, 0.7), 0 0.2rem 0.5rem rgba(0, 0, 0, 0.4);
+  --drum-vignette-start: rgba(14, 9, 33, 0.96);
+  --drum-vignette-mid: rgba(14, 9, 33, 0);
+
+  --highlight-bg: rgba(191, 90, 242, 0.22);
+  --highlight-border: rgba(191, 90, 242, 0.7);
+  --highlight-glow: 0 0 0.8rem rgba(191, 90, 242, 0.35);
+
+  --item-text: rgba(210, 200, 240, 0.65);
+  --item-active-text: #ffffff;
+  --item-active-shadow: 0 0 0.8rem rgba(191, 90, 242, 0.7);
+  --separator-bg: rgba(190, 160, 255, 0.25);
+
+  --hero-bg: linear-gradient(135deg, rgba(38, 25, 75, 0.95) 0%, rgba(20, 13, 44, 0.95) 100%);
+  --hero-border: #644a9e;
+  --hero-num-color: #e494ff;
+}
+
+/* ==========================================================================
+   Global Reset & Base Setup
+   ========================================================================== */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 62.5%; /* 1rem = 10px */
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  background-color: var(--bg-app);
+  background-image: var(--bg-gradient);
+  background-attachment: fixed;
+  font-family: var(--font-sans);
+  color: var(--text-main);
+  line-height: 1.5;
+  overflow-x: hidden;
+  transition: background-color var(--transition-normal), color var(--transition-normal);
+}
+
+.sr-only {
+  position: absolute !important;
+  width: 0.1rem !important;
+  height: 0.1rem !important;
+  padding: 0 !important;
+  margin: -0.1rem !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+
+/* ==========================================================================
+   App Container & Header
+   ========================================================================== */
+.app-wrapper {
+  max-width: 108rem;
+  margin: 0 auto;
+  padding: 2.4rem 1.6rem 4rem;
+}
+
+.app-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1.6rem;
+  margin-bottom: 2.8rem;
+  padding-bottom: 1.8rem;
+  border-bottom: 0.12rem solid var(--card-border);
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 1.4rem;
+}
+
+.logo-icon {
+  font-size: 3.6rem;
+  line-height: 1;
+  filter: drop-shadow(0 0.2rem 0.6rem var(--accent-glow));
+}
+
+.app-title {
+  margin: 0;
+  font-size: 2.4rem;
+  font-weight: 800;
+  letter-spacing: -0.04rem;
+  color: var(--text-main);
+}
+
+.app-subtitle {
+  margin: 0.4rem 0 0;
+  font-size: 1.3rem;
+  color: var(--text-muted);
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.theme-select {
+  appearance: none;
+  -webkit-appearance: none;
+  background: var(--card-bg);
+  color: var(--text-main);
+  border: 0.12rem solid var(--card-border);
+  border-radius: var(--radius-sm);
+  padding: 0.8rem 1.4rem;
+  font-size: 1.3rem;
+  font-weight: 600;
+  cursor: pointer;
+  outline: none;
+  transition: all var(--transition-fast);
+  box-shadow: 0 0.2rem 0.5rem rgba(0, 0, 0, 0.2);
+}
+
+.theme-select:hover, .theme-select:focus {
+  border-color: var(--accent-gold);
+}
+
+.lang-btn {
+  background: var(--card-bg);
+  color: var(--text-main);
+  border: 0.12rem solid var(--card-border);
+  border-radius: var(--radius-sm);
+  padding: 0.8rem 1.2rem;
+  font-size: 1.3rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.lang-btn:hover {
+  border-color: var(--accent-gold);
+  transform: translateY(-0.1rem);
+}
+
+/* ==========================================================================
+   Pickers Grid & Cards
+   ========================================================================== */
+.main-container {
+  display: flex;
+  flex-direction: column;
+  gap: 3.2rem;
+}
+
+.pickers-grid {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: 1.8rem;
+}
+
+@media (max-width: 820px) {
+  .pickers-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.picker-card {
+  background: var(--card-bg);
+  border: 0.12rem solid var(--card-border);
+  border-radius: var(--radius-md);
+  padding: 2rem 1.8rem;
+  box-shadow: var(--card-shadow);
+  backdrop-filter: blur(1.2rem);
+  -webkit-backdrop-filter: blur(1.2rem);
+  display: flex;
+  flex-direction: column;
+  gap: 1.4rem;
+  position: relative;
+  transition: border-color var(--transition-fast);
+}
+
+.picker-card:hover {
+  border-color: var(--accent-gold-dark);
+}
+
+.card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+}
+
+.card-title-group {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.card-tag {
+  font-size: 1.1rem;
+  font-weight: 800;
+  padding: 0.2rem 0.7rem;
+  border-radius: 0.4rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05rem;
+}
+
+.start-tag {
+  background: rgba(240, 205, 140, 0.2);
+  color: var(--accent-gold);
+  border: 0.1rem solid var(--accent-gold);
+}
+
+.end-tag {
+  background: rgba(94, 219, 154, 0.2);
+  color: #5edb9a;
+  border: 0.1rem solid #5edb9a;
+}
+
+.card-title {
+  margin: 0;
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--text-main);
+}
+
+.card-date-badge {
+  font-family: var(--font-mono);
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--accent-gold);
+  background: rgba(0, 0, 0, 0.25);
+  padding: 0.4rem 0.9rem;
+  border-radius: var(--radius-sm);
+  border: 0.1rem solid rgba(255, 255, 255, 0.08);
+}
+
+/* Presets buttons */
+.card-presets {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+
+.preset-btn {
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--text-muted);
+  border: 0.1rem solid rgba(255, 255, 255, 0.1);
+  border-radius: 0.4rem;
+  padding: 0.45rem 0.85rem;
+  font-size: 1.15rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.preset-btn:hover {
+  background: rgba(255, 255, 255, 0.12);
+  color: var(--text-main);
+  border-color: var(--accent-gold);
+}
+
+.preset-btn.active {
+  background: var(--accent-gold);
+  color: #120904;
+  border-color: var(--accent-gold);
+  font-weight: 700;
+}
+
+/* ==========================================================================
+   iOS 3D Cylinder Drum Wheel Picker
+   (Strictly matching ref/styles.css architecture & classes)
+   ========================================================================== */
+
+.ios-wheel-picker {
+  position: relative;
+  width: 100%;
+  height: var(--wheel-height); /* 7.8rem = 78px */
+  border: 0.12rem solid var(--drum-border);
+  border-radius: 0.6rem;
+  background: var(--drum-bg);
+  box-shadow: var(--drum-shadow);
+  display: flex;
+  align-items: stretch;
+  overflow: hidden;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: none;
+}
+
+/* Top & Bottom fade vignette for authentic wood cylinder horizon */
+.ios-wheel-picker::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(180deg, 
+    var(--drum-vignette-start) 0%, 
+    var(--drum-vignette-mid) 24%, 
+    var(--drum-vignette-mid) 76%, 
+    var(--drum-vignette-start) 100%
+  );
+  z-index: 4;
+}
+
+/* Center selection highlight bar / lens */
+.ios-picker-highlight {
+  position: absolute;
+  top: 50%;
+  left: 0.2rem;
+  right: 0.2rem;
+  height: var(--item-height); /* 2.6rem = 26px */
+  transform: translateY(-50%);
+  background: var(--highlight-bg);
+  border-top: 0.12rem solid var(--highlight-border);
+  border-bottom: 0.12rem solid var(--highlight-border);
+  border-radius: 0.4rem;
+  box-shadow: var(--highlight-glow);
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* Wheel Columns */
+.ios-picker-column {
+  position: relative;
+  height: 100%;
+  overflow: hidden;
+  perspective: 500px;
+  perspective-origin: center center;
+  cursor: grab;
+  touch-action: none;
+  outline: none;
+}
+
+.ios-picker-column:active {
+  cursor: grabbing;
+}
+
+.ios-picker-column:focus-visible {
+  outline: 0.12rem solid var(--accent-gold);
+}
+
+/* Column Width Proportions */
+.ios-picker-column[data-type="year"] {
+  flex: 1.4;
+}
+
+.ios-picker-column[data-type="month"] {
+  flex: 1.0;
+}
+
+.ios-picker-column[data-type="day"] {
+  flex: 1.0;
+}
+
+/* Separator between columns */
+.ios-picker-separator {
+  width: 0.1rem;
+  height: 65%;
+  margin: auto 0;
+  background: var(--separator-bg);
+  z-index: 3;
+  pointer-events: none;
+}
+
+/* Wheel 3D Container */
+.ios-picker-wheel {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  pointer-events: auto;
+}
+
+/* Individual Items inside Wheel */
+.ios-picker-item {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 100%;
+  height: var(--item-height); /* 2.6rem = 26px */
+  margin-top: calc(-1 * var(--item-half-height)); /* -1.3rem */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--item-text);
+  font-weight: 600;
+  font-size: 1.3rem;
+  line-height: 1;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  transform-origin: center center;
+  will-change: transform, opacity;
+  transition: none;
+  pointer-events: auto;
+  white-space: nowrap;
+}
+
+.ios-picker-item.active {
+  color: var(--item-active-text);
+  font-size: 1.5rem;
+  font-weight: bold;
+  text-shadow: var(--item-active-shadow);
+}
+
+/* ==========================================================================
+   Picker Stepper Nav Row & Meta Pills
+   ========================================================================== */
+.picker-steppers {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.6rem;
+}
+
+.stepper-group {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  background: rgba(0, 0, 0, 0.2);
+  border: 0.1rem solid rgba(255, 255, 255, 0.06);
+  border-radius: 0.4rem;
+  padding: 0.2rem 0.4rem;
+}
+
+.step-btn {
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  font-size: 1.1rem;
+  cursor: pointer;
+  padding: 0.3rem 0.6rem;
+  border-radius: 0.3rem;
+  transition: all var(--transition-fast);
+}
+
+.step-btn:hover {
+  background: rgba(255, 255, 255, 0.15);
+  color: var(--text-main);
+}
+
+.step-btn:active {
+  transform: scale(0.92);
+}
+
+.stepper-label {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--text-subtle);
+}
+
+.card-meta-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+
+.meta-pill {
+  background: rgba(0, 0, 0, 0.25);
+  color: var(--text-muted);
+  border: 0.1rem solid rgba(255, 255, 255, 0.08);
+  border-radius: 1.2rem;
+  padding: 0.35rem 0.85rem;
+  font-size: 1.15rem;
+  font-weight: 600;
+}
+
+/* ==========================================================================
+   Swap Divider Button
+   ========================================================================== */
+.swap-divider {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.swap-btn {
+  background: var(--card-bg);
+  color: var(--accent-gold);
+  border: 0.12rem solid var(--accent-gold-dark);
+  border-radius: 50%;
+  width: 4.8rem;
+  height: 4.8rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 0.4rem 1.2rem rgba(0, 0, 0, 0.4);
+  transition: all var(--transition-normal);
+  padding: 0;
+}
+
+.swap-icon {
+  font-size: 1.8rem;
+  line-height: 1;
+  transition: transform var(--transition-normal);
+}
+
+.swap-text {
+  font-size: 0.9rem;
+  font-weight: 700;
+  margin-top: 0.1rem;
+}
+
+.swap-btn:hover {
+  background: var(--accent-gold);
+  color: #120904;
+  border-color: var(--accent-gold);
+  transform: scale(1.08) rotate(180deg);
+}
+
+.swap-btn:active {
+  transform: scale(0.95) rotate(180deg);
+}
+
+@media (max-width: 820px) {
+  .swap-btn {
+    width: auto;
+    height: auto;
+    border-radius: var(--radius-sm);
+    flex-direction: row;
+    gap: 0.6rem;
+    padding: 0.8rem 1.6rem;
+  }
+  .swap-btn:hover {
+    transform: scale(1.02);
+  }
+}
+
+/* ==========================================================================
+   Result Hero Card
+   ========================================================================== */
+.result-hero {
+  background: var(--hero-bg);
+  border: 0.15rem solid var(--hero-border);
+  border-radius: var(--radius-lg);
+  padding: 2.6rem 2.4rem;
+  box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.5), inset 0 0.1rem 0 rgba(255, 255, 255, 0.2);
+  position: relative;
+  overflow: hidden;
+}
+
+.result-hero::before {
+  content: "";
+  position: absolute;
+  top: -40%;
+  left: 20%;
+  width: 60%;
+  height: 80%;
+  background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%);
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+.result-hero-inner {
+  position: relative;
+  z-index: 1;
+}
+
+.result-top-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1.2rem;
+  margin-bottom: 2rem;
+}
+
+.result-label-group {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.result-icon {
+  font-size: 2.4rem;
+}
+
+.result-title {
+  margin: 0;
+  font-size: 1.9rem;
+  font-weight: 800;
+  color: var(--text-main);
+}
+
+.copy-btn {
+  background: rgba(255, 255, 255, 0.12);
+  color: var(--text-main);
+  border: 0.12rem solid rgba(255, 255, 255, 0.25);
+  border-radius: var(--radius-sm);
+  padding: 0.8rem 1.4rem;
+  font-size: 1.3rem;
+  font-weight: 700;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  transition: all var(--transition-fast);
+}
+
+.copy-btn:hover {
+  background: var(--accent-gold);
+  color: #120904;
+  border-color: var(--accent-gold);
+  transform: translateY(-0.1rem);
+}
+
+.copy-btn:active {
+  transform: translateY(0.1rem);
+}
+
+/* Negative Notice */
+.negative-notice {
+  background: rgba(235, 150, 40, 0.18);
+  border: 0.12rem solid rgba(235, 150, 40, 0.6);
+  border-radius: var(--radius-sm);
+  padding: 1rem 1.4rem;
+  margin-bottom: 1.6rem;
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  font-size: 1.3rem;
+  color: #ffca66;
+}
+
+.negative-notice.hidden {
+  display: none;
+}
+
+/* Main Difference Counter Display */
+.diff-counter-display {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1.2rem 1.8rem;
+  margin: 1.6rem 0 2rem;
+}
+
+.diff-block {
+  display: flex;
+  align-items: baseline;
+  gap: 0.6rem;
+  background: rgba(0, 0, 0, 0.35);
+  padding: 1rem 2rem;
+  border-radius: var(--radius-md);
+  border: 0.12rem solid rgba(255, 255, 255, 0.12);
+  box-shadow: inset 0 0.2rem 0.6rem rgba(0, 0, 0, 0.4);
+}
+
+.diff-number {
+  font-family: var(--font-mono);
+  font-size: 4.8rem;
+  font-weight: 900;
+  line-height: 1;
+  color: var(--hero-num-color);
+  letter-spacing: -0.1rem;
+  text-shadow: 0 0.2rem 1rem rgba(0, 0, 0, 0.6);
+}
+
+.diff-unit {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--text-muted);
+}
+
+.diff-plus {
+  font-size: 2.8rem;
+  font-weight: 800;
+  color: var(--text-subtle);
+  user-select: none;
+}
+
+.diff-summary-sentence {
+  text-align: center;
+  margin: 0;
+  font-size: 1.5rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+.diff-summary-sentence strong {
+  color: var(--text-main);
+  font-weight: 700;
+}
+
+/* ==========================================================================
+   Breakdown Multi-unit Section
+   ========================================================================== */
+.section-subtitle {
+  font-size: 1.8rem;
+  font-weight: 800;
+  margin: 0 0 1.6rem;
+  color: var(--text-main);
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.breakdown-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(22rem, 1fr));
+  gap: 1.4rem;
+}
+
+.breakdown-card {
+  background: var(--card-bg);
+  border: 0.12rem solid var(--card-border);
+  border-radius: var(--radius-md);
+  padding: 1.6rem;
+  display: flex;
+  align-items: center;
+  gap: 1.4rem;
+  box-shadow: var(--card-shadow);
+  transition: transform var(--transition-fast), border-color var(--transition-fast);
+}
+
+.breakdown-card:hover {
+  transform: translateY(-0.2rem);
+  border-color: var(--accent-gold);
+}
+
+.breakdown-icon {
+  font-size: 2.8rem;
+  line-height: 1;
+}
+
+.breakdown-value {
+  font-family: var(--font-mono);
+  font-size: 1.9rem;
+  font-weight: 800;
+  color: var(--text-main);
+  letter-spacing: -0.02rem;
+}
+
+.breakdown-label {
+  font-size: 1.2rem;
+  color: var(--text-muted);
+  margin-top: 0.2rem;
+}
+
+/* ==========================================================================
+   Milestones & Birthday Countdown Section
+   ========================================================================== */
+.milestones-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(28rem, 1fr));
+  gap: 1.6rem;
+}
+
+.milestone-card {
+  background: var(--card-bg);
+  border: 0.12rem solid var(--card-border);
+  border-radius: var(--radius-md);
+  padding: 1.8rem;
+  box-shadow: var(--card-shadow);
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  position: relative;
+}
+
+.milestone-card.highlight-card {
+  border-color: var(--accent-gold);
+  background: linear-gradient(135deg, var(--card-bg) 0%, rgba(240, 205, 140, 0.08) 100%);
+}
+
+.milestone-badge {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--accent-gold);
+}
+
+.milestone-headline {
+  font-size: 2.2rem;
+  font-weight: 900;
+  color: var(--text-main);
+  letter-spacing: -0.03rem;
+}
+
+.milestone-sub {
+  font-size: 1.25rem;
+  color: var(--text-muted);
+}
+
+.progress-bar-bg {
+  width: 100%;
+  height: 0.8rem;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 0.4rem;
+  overflow: hidden;
+  margin-top: 0.4rem;
+}
+
+.progress-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--accent-gold-dark) 0%, var(--accent-gold) 100%);
+  border-radius: 0.4rem;
+  transition: width 0.5s ease;
+}
+
+.progress-note {
+  font-size: 1.15rem;
+  color: var(--text-subtle);
+}
+
+/* ==========================================================================
+   Footer & Tips
+   ========================================================================== */
+.app-footer {
+  margin-top: 1.6rem;
+}
+
+.tips-box {
+  background: rgba(0, 0, 0, 0.2);
+  border: 0.1rem solid var(--card-border);
+  border-radius: var(--radius-md);
+  padding: 1.8rem 2rem;
+}
+
+.tips-title {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--text-main);
+  margin-bottom: 1rem;
+}
+
+.tips-list {
+  margin: 0;
+  padding-left: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  font-size: 1.25rem;
+  color: var(--text-muted);
+}
+
+.tips-list li strong {
+  color: var(--text-main);
+}
+
+/* ==========================================================================
+   Toast Notification
+   ========================================================================== */
+.toast {
+  position: fixed;
+  bottom: 2.4rem;
+  left: 50%;
+  transform: translateX(-50%) translateY(5rem);
+  background: #1c1c1e;
+  color: #ffffff;
+  border: 0.12rem solid var(--accent-gold);
+  border-radius: var(--radius-sm);
+  padding: 1rem 2rem;
+  font-size: 1.4rem;
+  font-weight: 700;
+  box-shadow: 0 0.8rem 2rem rgba(0, 0, 0, 0.6);
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.28s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  z-index: 100;
+}
+
+.toast.show {
+  transform: translateX(-50%) translateY(0);
+  opacity: 1;
+}
+
+/* ==========================================================================
+   Mobile Responsive Fine-Tuning
+   ========================================================================== */
+@media (max-width: 480px) {
+  .app-wrapper {
+    padding: 1.4rem 1rem 3rem;
+  }
+  .app-title {
+    font-size: 2rem;
+  }
+  .diff-number {
+    font-size: 3.6rem;
+  }
+  .diff-block {
+    padding: 0.8rem 1.4rem;
+  }
+  .diff-unit {
+    font-size: 1.5rem;
+  }
+  .diff-plus {
+    font-size: 2rem;
+  }
+}
